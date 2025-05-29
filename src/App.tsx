@@ -22,7 +22,13 @@ function App() {
         <h1>🎯 Natural Language Task Manager</h1>
         <p>
           Add tasks in natural language like "Finish landing page Aman by 11pm
-          20th June"
+          20th June".,
+          <br />
+          28th may ko Rajive ko bajar jana hai subha 10 baje Sabji lene, ghar me
+          bilkul sabji nhi hai khayenge kya?,
+          <br />
+          30 may ko bhandara khane jana hai hanumanji ke mandir me, bhaut urgent
+          hai.
         </p>
       </header>
 
