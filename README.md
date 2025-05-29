@@ -172,3 +172,8 @@ If you encounter any issues or have questions:
 - Check the browser console for error messages
 - Ensure all prerequisites are met
 - Verify your OpenAI API key is working
+
+## Screenshot of App
+![App Screenshot](src/assets/screenshots/Screenshot1.png)
+![App Screenshot](src/assets/screenshots/Screenshot2.png)
+![App Screenshot](src/assets/screenshots/Screenshot3.png)
