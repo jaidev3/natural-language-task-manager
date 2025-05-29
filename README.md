@@ -1,156 +1,174 @@
-# Natural Language Task Manager (Enterprise-Grade To-Do List)
+# 🎯 Natural Language Task Manager
 
-## Objective
+A modern React-based task management application that allows you to create and manage tasks using natural language input. The app supports multiple languages and can parse meeting transcripts to automatically extract tasks.
 
-Build a Web App that lets a user add natural language tasks like:
-"Finish landing page Aman by 11pm 20th June"
-"Call client Rajeev tomorrow 5pm"
+## ✨ Features
 
-## ✨ Key Features
+- **Natural Language Processing**: Add tasks using conversational language
+- **Multi-language Support**: Works with English, Hindi, and other languages
+- **Meeting Transcript Parser**: Extract tasks from meeting transcripts
+- **Smart Task Parsing**: Automatically extracts titles, assignees, due dates, and priorities
+- **Modern UI**: Clean and intuitive user interface
+- **Local Storage**: Tasks and API keys are stored locally in your browser
 
-### Enhanced API Key Management
+## 🚀 Prerequisites
 
-- **Secure Local Storage**: API keys are automatically saved to browser's local storage
-- **Modern UI**: Beautiful, collapsible interface with gradient styling and smooth animations
-- **Full CRUD Operations**: Add, edit, view, and delete API keys with confirmation prompts
-- **Privacy Controls**: Toggle visibility to show/hide API key with masked display (shows first 4 and last 4 characters)
-- **Smart Validation**: Prevents task creation when no API key is configured with helpful user guidance
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
+Before running this application, make sure you have the following installed:
 
-### Natural Language Processing
+- **Node.js** (version 16 or higher)
+- **npm** or **yarn** package manager
+- **OpenAI API Key** (required for natural language processing)
 
-- **OpenAI Integration**: Uses OpenAI's GPT models for advanced task parsing
-- **Intelligent Extraction**: Automatically extracts task name, assignee, due date, and priority
-- **Flexible Input**: Supports various natural language formats and date expressions
-
-## Functionality Requirements
-
-- Extract:
-  - Task Name (e.g., "Finish landing page")
-  - Assignee (e.g., "Aman")
-  - Due Date & Time (e.g., "11pm 20th June")
-  - Default priority P3 unless specified as P1, P2, or P4
-- Display the parsed task in a beautiful UI task board/list.
-
-**Example Output:**
-| Task | Assigned To | Due Date/Time | Priority |
-|---------------------|-------------|--------------------|----------|
-| Finish landing page | Aman | 11:00 PM, 20 June | P3 |
-
-## 🚀 Getting Started
+## 📦 Installation
 
 1. **Clone the repository**
-2. **Install dependencies**: `npm install`
-3. **Start development server**: `npm run dev`
-4. **Configure API Key**: Click on the API Key section and add your OpenAI API key
-5. **Add Tasks**: Start adding tasks in natural language!
 
-## 🔑 API Key Setup
+   ```bash
+   git clone <repository-url>
+   cd natural-language-task-manager
+   ```
 
-1. Get your OpenAI API key from [OpenAI Platform](https://platform.openai.com/api-keys)
-2. In the app, click on the "🔑 OpenAI API Key" section
-3. Enter your API key (it will be masked for security)
-4. Click "Save API Key" - it will be stored securely in your browser
-5. You can edit or delete the key anytime using the provided controls
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-## Project Plan
+## 🔧 Setup
 
-**Phase 1: Core Functionality & Setup**
+### OpenAI API Key
 
-1.  **Project Initialization & Basic Structure**:
-    - Confirm React + Vite setup.
-    - Create a basic folder structure:
-      - `src/components/`: For UI components (e.g., `TaskList`, `TaskItem`, `TaskInput`).
-      - `src/services/`: For logic like NLP parsing, task management.
-      - `src/hooks/`: For custom React hooks.
-      - `src/utils/`: For utility functions (e.g., date formatting).
-      - `src/types/`: For TypeScript type definitions.
-2.  **Natural Language Processing (NLP) Module** (`src/services/nlpParser.ts`):
-    - **Objective**: Implement a function that takes a natural language string and returns a structured task object.
-    - **Extraction Logic**:
-      - **Task Name**: Identify the core action/description.
-      - **Assignee**: Look for names or keywords indicating assignment (e.g., "Aman", "to [Name]").
-      - **Due Date & Time**: Parse various date/time formats (e.g., "tomorrow 5pm", "20th June 11pm", "next Monday").
-      - **Priority**: Detect P1, P2, P4 keywords; default to P3 if none found.
-    - **Tools**: Consider libraries like `compromise` for general NLP and `date-fns` for robust date parsing and manipulation.
-3.  **Task Data Structure Definition** (`src/types/task.ts`):
-    - Define a TypeScript interface for a task, e.g.:
-      ```typescript
-      interface Task {
-        id: string;
-        text: string; // Original natural language input
-        name: string; // Parsed task name
-        assignee?: string;
-        dueDate?: Date;
-        priority: "P1" | "P2" | "P3" | "P4";
-        isCompleted: boolean;
-      }
-      ```
-4.  **Task Management Logic** (Initially in-memory, e.g., using React state or a custom hook `src/hooks/useTaskManager.ts`):
-    - **Add Task**: Function to take parsed task data and add it to a list.
-    - **List Tasks**: Store and provide the current list of tasks.
-    - **Generate Unique IDs**: Use a library like `uuid`.
+This application requires an OpenAI API key to function properly. You'll need to:
 
-**Phase 2: Frontend Development (React)**
+1. **Get an OpenAI API key**:
 
-1.  **Task Input Component** (`src/components/TaskInput.tsx`):
-    - An input field for users to type their natural language tasks.
-    - On submission, it calls the NLP parser and then the task-adding function.
-2.  **Task Item Component** (`src/components/TaskItem.tsx`):
-    - Displays a single task with its details: Name, Assignee, Due Date/Time (formatted nicely), Priority.
-    - Could include a checkbox for marking as complete.
-3.  **Task List/Board Component** (`src/components/TaskList.tsx`):
-    - Renders a list of `TaskItem` components.
-    - Could be a simple list or a more complex board view (e.g., columns for priorities or statuses).
-4.  **Main Application UI** (`App.tsx`):
-    - Integrate `TaskInput` and `TaskList`.
-    - Manage the overall application state (tasks list).
+   - Visit [OpenAI Platform](https://platform.openai.com/)
+   - Sign up or log in to your account
+   - Navigate to API Keys section
+   - Create a new API key
 
-**Phase 3: Styling & User Experience (UX)**
+2. **Configure the API key**:
+   - The app will prompt you to enter your API key when you first use it
+   - Your API key is stored securely in your browser's local storage
+   - You can update or delete the API key anytime through the app interface
 
-1.  **Styling**:
-    - Apply CSS to create a "beautiful UI".
-    - Choose a styling approach:
-      - Vanilla CSS / CSS Modules.
-      - Utility-first CSS (e.g., Tailwind CSS).
-      - CSS-in-JS (e.g., Styled Components, Emotion).
-      - Component library (e.g., Material-UI, Ant Design).
-2.  **UX Enhancements**:
-    - Clear visual feedback on actions (e.g., task added, errors in parsing).
-    - Responsive design for different screen sizes.
-    - User-friendly date/time display.
+## 🏃‍♂️ Running the Application
 
-**Phase 4: Bonus Features (Iterative)**
+### Development Mode
 
-1.  **In-UI Task Editing**:
-    - Allow users to click on a task's details (name, assignee, due date, priority) and modify them directly.
-    - Update the task state accordingly.
-2.  **Task Deletion**:
-    - Add a button or action to remove tasks.
-3.  **Persistence**:
-    - Save tasks to `localStorage` so they persist across browser sessions.
-    - (Later) Consider a proper backend and database if scaling or multi-user features are needed.
-4.  **Filtering/Sorting**:
-    - Allow users to filter tasks (e.g., by assignee, priority) or sort them (e.g., by due date).
-5.  **Error Handling & Edge Cases**:
-    - Gracefully handle inputs that can't be parsed.
-    - Provide helpful error messages.
+To start the development server:
 
-## Production Dependencies
+```bash
+npm run dev
+```
 
-- `react`: For building the user interface.
-- `react-dom`: For rendering React components in the browser.
-- `compromise`: For client-side Natural Language Processing to parse task strings.
-- `date-fns`: For robust date parsing, formatting, and manipulation.
-- `uuid`: For generating unique IDs for tasks.
+The application will be available at `http://localhost:5173` (or another port if 5173 is busy).
 
-## Development Dependencies
+### Production Build
 
-- `@types/react`: TypeScript definitions for React.
-- `@types/react-dom`: TypeScript definitions for React DOM.
-- `@types/compromise`: TypeScript definitions for `compromise`.
-- `@types/uuid`: TypeScript definitions for `uuid`.
-- `@vitejs/plugin-react`: Vite plugin for React.
-- `eslint` and related plugins: For linting and code quality.
-- `typescript`: For static typing.
-- `vite`: For the build tool and development server.
+To build the application for production:
+
+```bash
+npm run build
+```
+
+To preview the production build:
+
+```bash
+npm run preview
+```
+
+### Code Quality
+
+To run the linter:
+
+```bash
+npm run lint
+```
+
+## 📖 Usage
+
+### Adding Tasks
+
+1. **Configure API Key**: Enter your OpenAI API key in the API Key section
+2. **Natural Language Input**: Type tasks in natural language, for example:
+   - "Finish landing page Aman by 11pm 20th June"
+   - "28th may ko Rajive ko bajar jana hai subha 10 baje Sabji lene"
+   - "30 may ko bhandara khane jana hai hanumanji ke mandir me"
+
+### Meeting Transcript Parser
+
+1. Paste meeting transcripts in the dedicated section
+2. The app will automatically extract tasks, assignees, and due dates
+3. Review and add the parsed tasks to your task list
+
+### Task Management
+
+- **Mark Complete**: Click the checkbox to mark tasks as completed
+- **Edit Tasks**: Click on any task to edit its details
+- **Delete Tasks**: Use the delete button to remove unwanted tasks
+- **View Details**: Tasks show title, assignee, due date, and priority
+
+## 🛠️ Technology Stack
+
+- **Frontend**: React 19 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: CSS3 with modern features
+- **API**: OpenAI GPT for natural language processing
+- **Date Handling**: date-fns library
+- **Language Processing**: compromise.js
+- **Storage**: Browser Local Storage
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── ApiKeyManager.tsx    # API key management
+│   ├── TaskInput.tsx        # Task input form
+│   ├── TaskList.tsx         # Task list display
+│   └── MeetingTranscriptParser.tsx  # Meeting parser
+├── hooks/              # Custom React hooks
+├── services/           # API and business logic
+├── types/              # TypeScript type definitions
+├── utils/              # Utility functions
+└── assets/             # Static assets
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🆘 Troubleshooting
+
+### Common Issues
+
+1. **API Key Not Working**:
+
+   - Ensure your OpenAI API key is valid and has sufficient credits
+   - Check that the key is correctly entered without extra spaces
+
+2. **Tasks Not Parsing**:
+
+   - Verify your internet connection
+   - Check if the OpenAI API is accessible
+   - Try refreshing the page and re-entering the API key
+
+3. **Development Server Issues**:
+   - Make sure you're using Node.js version 16 or higher
+   - Clear node_modules and reinstall: `rm -rf node_modules package-lock.json && npm install`
+
+### Getting Help
+
+If you encounter any issues or have questions:
+
+- Check the browser console for error messages
+- Ensure all prerequisites are met
+- Verify your OpenAI API key is working
