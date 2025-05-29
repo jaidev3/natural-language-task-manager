@@ -16,16 +16,41 @@ export function TaskItem({
   onDelete,
 }: TaskItemProps) {
   const [isEditing, setIsEditing] = useState(false);
+
+  // Helper function to safely convert date to ISO string for datetime-local input
+  const toDateTimeLocalString = (date?: Date): string => {
+    if (!date) return "";
+    try {
+      const dateObj = date instanceof Date ? date : new Date(date);
+      if (isNaN(dateObj.getTime())) return "";
+      return dateObj.toISOString().slice(0, 16);
+    } catch (error) {
+      console.error("Error converting date to string:", error);
+      return "";
+    }
+  };
+
   const [editData, setEditData] = useState({
     name: task.name,
     assignee: task.assignee || "",
-    dueDate: task.dueDate ? task.dueDate.toISOString().slice(0, 16) : "",
+    dueDate: toDateTimeLocalString(task.dueDate),
     priority: task.priority,
   });
 
   const formatDueDate = (date?: Date) => {
     if (!date) return "No due date";
-    return formatDateTime(date);
+    try {
+      // Ensure we have a Date object
+      const dateObj = date instanceof Date ? date : new Date(date);
+      // Check if the date is valid
+      if (isNaN(dateObj.getTime())) {
+        return "Invalid date";
+      }
+      return formatDateTime(dateObj);
+    } catch (error) {
+      console.error("Error formatting date:", error);
+      return "Invalid date";
+    }
   };
 
   const handleEdit = () => {
@@ -33,7 +58,7 @@ export function TaskItem({
     setEditData({
       name: task.name,
       assignee: task.assignee || "",
-      dueDate: task.dueDate ? task.dueDate.toISOString().slice(0, 16) : "",
+      dueDate: toDateTimeLocalString(task.dueDate),
       priority: task.priority,
     });
   };
@@ -57,7 +82,7 @@ export function TaskItem({
     setEditData({
       name: task.name,
       assignee: task.assignee || "",
-      dueDate: task.dueDate ? task.dueDate.toISOString().slice(0, 16) : "",
+      dueDate: toDateTimeLocalString(task.dueDate),
       priority: task.priority,
     });
   };

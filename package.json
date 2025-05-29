@@ -10,10 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
     "compromise": "^14.13.0",
     "date-fns": "^3.6.0",
+    "openai": "^4.103.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "uuid": "^10.0.0"
   },
   "devDependencies": {

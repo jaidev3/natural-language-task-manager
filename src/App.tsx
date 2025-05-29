@@ -1,12 +1,18 @@
-import React from "react";
 import { useTaskManager } from "./hooks/useTaskManager";
 import { TaskInput } from "./components/TaskInput";
 import { TaskList } from "./components/TaskList";
 import "./App.css";
 
 function App() {
-  const { tasks, addTask, updateTask, deleteTask, toggleComplete } =
-    useTaskManager();
+  const {
+    apiKey,
+    tasks,
+    addTask,
+    updateTask,
+    deleteTask,
+    toggleComplete,
+    setApiKey,
+  } = useTaskManager();
 
   return (
     <div className="App">
@@ -17,7 +23,13 @@ function App() {
           20th June"
         </p>
       </header>
-
+      <div>
+        <input
+          type="text"
+          value={apiKey}
+          onChange={(e) => setApiKey(e.target.value)}
+        />
+      </div>
       <main className="app-main">
         <div className="task-input-section">
           <TaskInput onAddTask={addTask} />
