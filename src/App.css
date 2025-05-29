@@ -36,6 +36,10 @@
   gap: 30px;
 }
 
+.api-key-section {
+  /* No additional styling needed as ApiKeyManager has its own styling */
+}
+
 .task-input-section {
   background: white;
   padding: 30px;

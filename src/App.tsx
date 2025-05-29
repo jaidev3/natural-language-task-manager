@@ -1,6 +1,7 @@
 import { useTaskManager } from "./hooks/useTaskManager";
 import { TaskInput } from "./components/TaskInput";
 import { TaskList } from "./components/TaskList";
+import { ApiKeyManager } from "./components/ApiKeyManager";
 import "./App.css";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     deleteTask,
     toggleComplete,
     setApiKey,
+    deleteApiKey,
   } = useTaskManager();
 
   return (
@@ -23,16 +25,18 @@ function App() {
           20th June"
         </p>
       </header>
-      <div>
-        <input
-          type="text"
-          value={apiKey}
-          onChange={(e) => setApiKey(e.target.value)}
-        />
-      </div>
+
       <main className="app-main">
+        <div className="api-key-section">
+          <ApiKeyManager
+            apiKey={apiKey}
+            onApiKeyChange={setApiKey}
+            onDeleteApiKey={deleteApiKey}
+          />
+        </div>
+
         <div className="task-input-section">
-          <TaskInput onAddTask={addTask} />
+          <TaskInput onAddTask={addTask} apiKey={apiKey} />
         </div>
 
         <div className="task-list-section">

@@ -6,6 +6,23 @@ Build a Web App that lets a user add natural language tasks like:
 "Finish landing page Aman by 11pm 20th June"
 "Call client Rajeev tomorrow 5pm"
 
+## ✨ Key Features
+
+### Enhanced API Key Management
+
+- **Secure Local Storage**: API keys are automatically saved to browser's local storage
+- **Modern UI**: Beautiful, collapsible interface with gradient styling and smooth animations
+- **Full CRUD Operations**: Add, edit, view, and delete API keys with confirmation prompts
+- **Privacy Controls**: Toggle visibility to show/hide API key with masked display (shows first 4 and last 4 characters)
+- **Smart Validation**: Prevents task creation when no API key is configured with helpful user guidance
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+
+### Natural Language Processing
+
+- **OpenAI Integration**: Uses OpenAI's GPT models for advanced task parsing
+- **Intelligent Extraction**: Automatically extracts task name, assignee, due date, and priority
+- **Flexible Input**: Supports various natural language formats and date expressions
+
 ## Functionality Requirements
 
 - Extract:
@@ -20,9 +37,21 @@ Build a Web App that lets a user add natural language tasks like:
 |---------------------|-------------|--------------------|----------|
 | Finish landing page | Aman | 11:00 PM, 20 June | P3 |
 
-## Bonus Features
+## 🚀 Getting Started
 
-- Allow editing of the parsed task directly in the UI.
+1. **Clone the repository**
+2. **Install dependencies**: `npm install`
+3. **Start development server**: `npm run dev`
+4. **Configure API Key**: Click on the API Key section and add your OpenAI API key
+5. **Add Tasks**: Start adding tasks in natural language!
+
+## 🔑 API Key Setup
+
+1. Get your OpenAI API key from [OpenAI Platform](https://platform.openai.com/api-keys)
+2. In the app, click on the "🔑 OpenAI API Key" section
+3. Enter your API key (it will be masked for security)
+4. Click "Save API Key" - it will be stored securely in your browser
+5. You can edit or delete the key anytime using the provided controls
 
 ## Project Plan
 

@@ -5,8 +5,13 @@ import { v4 as uuidv4 } from "uuid";
 import { parseStoredTasks } from "../utils/storageUtils";
 import { parseNaturalLanguageTaskAi } from "../services/openaiParser";
 
+const API_KEY_STORAGE_KEY = "openai_api_key";
+
 export function useTaskManager() {
-  const [apiKey, setApiKey] = useState("");
+  const [apiKey, setApiKeyState] = useState(() => {
+    const storedApiKey = localStorage.getItem(API_KEY_STORAGE_KEY);
+    return storedApiKey || "";
+  });
   const [tasks, setTasks] = useState<Task[]>(() => {
     const storedTasks = localStorage.getItem("tasks");
     return storedTasks ? parseStoredTasks(storedTasks) : [];
@@ -16,6 +21,24 @@ export function useTaskManager() {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  // Save API key to localStorage whenever it changes
+  useEffect(() => {
+    if (apiKey) {
+      localStorage.setItem(API_KEY_STORAGE_KEY, apiKey);
+    } else {
+      localStorage.removeItem(API_KEY_STORAGE_KEY);
+    }
+  }, [apiKey]);
+
+  const setApiKey = (key: string) => {
+    setApiKeyState(key);
+  };
+
+  const deleteApiKey = () => {
+    setApiKeyState("");
+    localStorage.removeItem(API_KEY_STORAGE_KEY);
+  };
 
   const addTask = async (naturalLanguageInput: string) => {
     // const parsedData = await parseNaturalLanguageTask(naturalLanguageInput);
@@ -63,5 +86,6 @@ export function useTaskManager() {
     toggleComplete,
     apiKey,
     setApiKey,
+    deleteApiKey,
   };
 }
