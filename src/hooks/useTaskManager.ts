@@ -18,7 +18,6 @@ export function useTaskManager() {
       priority: parsedData.priority,
       isCompleted: false,
     };
-
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
