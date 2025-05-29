@@ -390,6 +390,7 @@
   background: #ffffff;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .task-item:hover {
@@ -412,16 +413,21 @@
   display: flex;
   align-items: flex-start;
   gap: 15px;
+  width: 100%;
 }
 
 .task-checkbox {
   margin-top: 5px;
   transform: scale(1.2);
   accent-color: #667eea;
+  min-width: 20px;
+  flex-shrink: 0;
 }
 
 .task-details {
   flex: 1;
+  min-width: 0;
+  word-wrap: break-word;
 }
 
 .task-name {
@@ -430,6 +436,9 @@
   color: #2d3748;
   margin-bottom: 8px;
   line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .task-name.completed {
@@ -450,6 +459,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  flex-shrink: 0;
 }
 
 .task-original {
@@ -461,6 +471,9 @@
   background: #f7fafc;
   border-radius: 6px;
   border-left: 3px solid #e2e8f0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .priority-badge {
@@ -497,6 +510,7 @@
   flex-direction: column;
   gap: 8px;
   margin-left: 10px;
+  flex-shrink: 0;
 }
 
 .edit-button {
@@ -509,6 +523,10 @@
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .edit-button:hover {
@@ -527,6 +545,10 @@
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-button:hover {
@@ -564,6 +586,8 @@
   transition: all 0.3s ease;
   outline: none;
   background: white;
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
 .edit-input:focus {
@@ -575,6 +599,7 @@
   font-size: 1rem;
   font-weight: 600;
   padding: 12px 15px;
+  min-height: 48px;
 }
 
 .edit-actions {
@@ -593,6 +618,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .save-button:hover {
@@ -614,6 +643,17 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .task-item {
+    padding: 16px;
+  }
+
+  .edit-fields-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
 @media (max-width: 768px) {
   .App {
     padding: 15px;
@@ -632,9 +672,22 @@
     padding: 20px;
   }
 
+  .task-item {
+    padding: 15px;
+    margin-bottom: 12px;
+  }
+
+  .task-item-content {
+    gap: 12px;
+  }
+
   .task-meta {
     flex-direction: column;
     gap: 8px;
+  }
+
+  .task-meta-item {
+    font-size: 0.85rem;
   }
 
   .edit-fields-row {
@@ -644,10 +697,18 @@
 
   .task-actions {
     flex-direction: row;
+    gap: 6px;
+  }
+
+  .edit-button,
+  .delete-button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
   }
 
   .edit-actions {
     flex-direction: column;
+    gap: 8px;
   }
 
   .task-fields {
@@ -666,5 +727,131 @@
 
   .meeting-parser-section {
     padding: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .task-item {
+    padding: 12px;
+  }
+
+  .task-actions {
+    margin-left: 0;
+    margin-top: 10px;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .edit-button,
+  .delete-button {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .task-item {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .task-item-content {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .task-checkbox {
+    transform: scale(1.3);
+    align-self: flex-start;
+  }
+
+  .task-actions {
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .edit-button,
+  .delete-button,
+  .save-button,
+  .cancel-button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    font-size: 1rem;
+    min-height: 48px;
+    border-radius: 10px;
+  }
+
+  .edit-fields-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .edit-input,
+  .task-name-input {
+    font-size: 1rem;
+    padding: 14px 12px;
+    min-height: 48px;
+    border-radius: 10px;
+  }
+
+  .task-name {
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+
+  .task-meta {
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+
+  .task-meta-item {
+    padding: 2px 0;
+  }
+
+  .task-original {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+    margin-top: 12px;
+    line-height: 1.4;
+  }
+
+  .edit-actions {
+    gap: 8px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .task-item {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+
+  .task-name {
+    font-size: 1rem;
+  }
+
+  .task-meta {
+    font-size: 0.85rem;
+  }
+
+  .task-original {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+
+  .edit-button,
+  .delete-button,
+  .save-button,
+  .cancel-button {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    min-height: 44px;
   }
 }
