@@ -2,6 +2,7 @@ import { useTaskManager } from "./hooks/useTaskManager";
 import { TaskInput } from "./components/TaskInput";
 import { TaskList } from "./components/TaskList";
 import { ApiKeyManager } from "./components/ApiKeyManager";
+import { MeetingTranscriptParser } from "./components/MeetingTranscriptParser";
 import "./App.css";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     apiKey,
     tasks,
     addTask,
+    addMultipleTasks,
     updateTask,
     deleteTask,
     toggleComplete,
@@ -43,6 +45,13 @@ function App() {
 
         <div className="task-input-section">
           <TaskInput onAddTask={addTask} apiKey={apiKey} />
+        </div>
+
+        <div className="meeting-parser-section">
+          <MeetingTranscriptParser
+            onAddTasks={addMultipleTasks}
+            apiKey={apiKey}
+          />
         </div>
 
         <div className="task-list-section">

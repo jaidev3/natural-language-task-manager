@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 // import { parseNaturalLanguageTask } from "../services/nlpParser";
 import { parseStoredTasks } from "../utils/storageUtils";
 import { parseNaturalLanguageTaskAi } from "../services/openaiParser";
+import type { ParsedTaskData } from "../services/openaiParser";
 
 const API_KEY_STORAGE_KEY = "openai_api_key";
 
@@ -60,6 +61,19 @@ export function useTaskManager() {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
+  const addMultipleTasks = (parsedTasks: ParsedTaskData[]) => {
+    const newTasks: Task[] = parsedTasks.map((parsedData) => ({
+      id: uuidv4(),
+      text: `Meeting task: ${parsedData.name}`,
+      name: parsedData.name,
+      assignee: parsedData.assignee,
+      dueDate: parsedData.dueDate,
+      priority: parsedData.priority,
+      isCompleted: false,
+    }));
+    setTasks((prevTasks) => [...prevTasks, ...newTasks]);
+  };
+
   const updateTask = (id: string, updates: Partial<Task>) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) => (task.id === id ? { ...task, ...updates } : task))
@@ -81,6 +95,7 @@ export function useTaskManager() {
   return {
     tasks,
     addTask,
+    addMultipleTasks,
     updateTask,
     deleteTask,
     toggleComplete,
