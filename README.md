@@ -1,3 +1,7 @@
+# Link of deployment
+
+https://sprightly-buttercream-b8d18a.netlify.app/
+
 # 🎯 Natural Language Task Manager
 
 A modern React-based task management application that allows you to create and manage tasks using natural language input. The app supports multiple languages and can parse meeting transcripts to automatically extract tasks.
